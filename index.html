@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lwin Moe Aung — Data Scientist · Cinematic Portfolio</title>
+  <meta name="description" content="An immersive 3D parallax portfolio for Lwin Moe Aung — Data Scientist, ML Engineer, AI & Analytics Specialist." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── Loader ── -->
+  <div class="loader" id="loader">
+    <div class="loader__inner">
+      <div class="loader__name">LWIN MOE AUNG</div>
+      <div class="loader__bar"><div class="loader__fill" id="loaderFill"></div></div>
+      <div class="loader__pct" id="loaderPct">0</div>
+    </div>
+  </div>
+
+  <!-- ── Cursor ── -->
+  <div class="cursor" id="cursor">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <!-- ── Nav ── -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav__brand">LMA<span>.</span></a>
+    <ul class="nav__menu">
+      <li><a href="#manifesto">01</a><span>Manifesto</span></li>
+      <li><a href="#projects">02</a><span>Projects</span></li>
+      <li><a href="#journey">03</a><span>Journey</span></li>
+      <li><a href="#contact">04</a><span>Contact</span></li>
+    </ul>
+    <div class="nav__time" id="navTime">SGT</div>
+  </nav>
+
+  <!-- ── Smooth scroll wrapper ── -->
+  <div class="scroll" id="scroll">
+    <div class="scroll__inner" id="scrollInner">
+
+      <!-- ════════════════════════════════════════
+           HERO SCENE
+      ════════════════════════════════════════ -->
+      <section class="scene hero" id="hero">
+        <canvas class="hero__canvas" id="flowCanvas"></canvas>
+        <div class="hero__gradient"></div>
+        <div class="hero__noise"></div>
+
+        <div class="hero__camera" data-camera>
+          <div class="hero__layer" data-depth="40">
+            <div class="hero__meta">
+              <span class="meta-line">Lat 1.3521° N</span>
+              <span class="meta-line">Lon 103.8198° E</span>
+              <span class="meta-line">Singapore · 2026</span>
+            </div>
+          </div>
+
+          <div class="hero__layer hero__layer--main" data-depth="-30">
+            <p class="hero__tag" data-split>Data Scientist · ML Engineer · AI Specialist</p>
+            <h1 class="hero__title">
+              <span class="word" data-word>Lwin</span>
+              <span class="word" data-word>Moe</span>
+              <span class="word word--accent" data-word>Aung</span>
+            </h1>
+            <p class="hero__sub" data-split>Building systems that reason. Models that move. Stories that data alone could not tell.</p>
+          </div>
+
+          <div class="hero__layer" data-depth="80">
+            <div class="hero__credit">
+              <span>Portfolio</span>
+              <span class="hero__credit-num">— 02 / 26</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__scroll-hint">
+          <span>Scroll</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           MANIFESTO — sticky scrub
+      ════════════════════════════════════════ -->
+      <section class="scene manifesto" id="manifesto">
+        <div class="manifesto__sticky">
+          <canvas class="manifesto__canvas" id="manifestoCanvas"></canvas>
+          <div class="manifesto__content">
+            <p class="section-num">01 / Manifesto</p>
+            <h2 class="manifesto__line manifesto__line--1">
+              <span class="char" data-char>I</span>
+              <span class="char" data-char>&nbsp;</span>
+              <span class="char" data-char>t</span>
+              <span class="char" data-char>u</span>
+              <span class="char" data-char>r</span>
+              <span class="char" data-char>n</span>
+            </h2>
+            <h2 class="manifesto__line manifesto__line--2">
+              <em>data</em> into <em>decisions</em>,
+            </h2>
+            <h2 class="manifesto__line manifesto__line--3">
+              models into <em>momentum</em>,
+            </h2>
+            <h2 class="manifesto__line manifesto__line--4">
+              insights into <em>action.</em>
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           STATS PARALLAX BAND
+      ════════════════════════════════════════ -->
+      <section class="scene stats">
+        <div class="stats__marquee" data-marquee>
+          <div class="stats__row">
+            <span class="stats__big">607K+ records</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">AUC&nbsp;0.93</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">Silhouette&nbsp;0.891</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">$12.6M analysed</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">5K+ respondents</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">RMSE −50%</span>
+            <span class="stats__sep">·</span>
+          </div>
+          <div class="stats__row" aria-hidden="true">
+            <span class="stats__big">607K+ records</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">AUC&nbsp;0.93</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">Silhouette&nbsp;0.891</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">$12.6M analysed</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">5K+ respondents</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">RMSE −50%</span>
+            <span class="stats__sep">·</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           PROJECTS — sticky cinematic showcase
+      ════════════════════════════════════════ -->
+      <section class="scene projects" id="projects">
+        <div class="projects__intro">
+          <p class="section-num">02 / Selected Work</p>
+          <h2 class="section-display">Four scenes,<br>one practice.</h2>
+        </div>
+
+        <!-- ── Project 1 ── -->
+        <article class="proj" data-proj="1">
+          <div class="proj__sticky">
+            <div class="proj__bg proj__bg--1" data-depth="20"></div>
+            <canvas class="proj__viz" id="viz1" data-viz="network"></canvas>
+            <div class="proj__shapes proj__shapes--1" data-depth="-40"></div>
+            <div class="proj__grid"></div>
+            <div class="proj__mask"></div>
+            <div class="proj__camera" data-camera>
+              <div class="proj__inner">
+                <div class="proj__meta">
+                  <span>Personal Project</span>
+                  <span>2025</span>
+                </div>
+                <h3 class="proj__title">Personal AI<br>Assistant.</h3>
+                <p class="proj__sub">NLP &amp; Agentic System · OpenClaw + Ollama</p>
+                <p class="proj__desc">
+                  A locally-hosted agentic AI assistant powered by Qwen3.5 397B —
+                  zero API cost, full control. Multi-step reasoning with tool-use,
+                  contextual memory, ReAct architecture, and autonomous task execution.
+                </p>
+                <div class="proj__nums">
+                  <div><b>Qwen3.5</b><i>397B parameters</i></div>
+                  <div><b>$0</b><i>API cost</i></div>
+                  <div><b>Local</b><i>full control</i></div>
+                </div>
+                <div class="proj__chips">
+                  <span>OpenClaw</span><span>Ollama</span><span>Prompt Engineering</span><span>ReAct</span><span>Tool-use</span>
+                </div>
+              </div>
+            </div>
+            <div class="proj__index">01</div>
+          </div>
+        </article>
+
+        <!-- ── Project 2 ── -->
+        <article class="proj" data-proj="2">
+          <div class="proj__sticky">
+            <div class="proj__bg proj__bg--2" data-depth="20"></div>
+            <canvas class="proj__viz" id="viz2" data-viz="clusters"></canvas>
+            <div class="proj__shapes proj__shapes--2" data-depth="-40"></div>
+            <div class="proj__grid"></div>
+            <div class="proj__mask"></div>
+            <div class="proj__camera" data-camera>
+              <div class="proj__inner">
+                <div class="proj__meta">
+                  <span>University of London</span>
+                  <span>2025</span>
+                </div>
+                <h3 class="proj__title">Customer Propensity<br>Pipeline.</h3>
+                <p class="proj__sub">Machine Learning · 607,056 records</p>
+                <p class="proj__desc">
+                  End-to-end ML pipeline. K-Means &amp; GMM clustering, Random Forest classifiers,
+                  Gradient Boosting regression with 10-fold cross-validation.
+                  Outputs translated into tiered CRM targeting strategies.
+                </p>
+                <div class="proj__nums">
+                  <div><b>0.93</b><i>AUC</i></div>
+                  <div><b>0.891</b><i>Silhouette</i></div>
+                  <div><b>−50%</b><i>RMSE vs. baseline</i></div>
+                </div>
+                <div class="proj__chips">
+                  <span>Python</span><span>XGBoost</span><span>scikit-learn</span><span>R</span><span>K-Means</span><span>GMM</span>
+                </div>
+              </div>
+            </div>
+            <div class="proj__index">02</div>
+          </div>
+        </article>
+
+        <!-- ── Project 3 ── -->
+        <article class="proj" data-proj="3">
+          <div class="proj__sticky">
+            <div class="proj__bg proj__bg--3" data-depth="20"></div>
+            <canvas class="proj__viz" id="viz3" data-viz="bars"></canvas>
+            <div class="proj__shapes proj__shapes--3" data-depth="-40"></div>
+            <div class="proj__grid"></div>
+            <div class="proj__mask"></div>
+            <div class="proj__camera" data-camera>
+              <div class="proj__inner">
+                <div class="proj__meta">
+                  <span>Wayne Trading Co.</span>
+                  <span>2025</span>
+                </div>
+                <h3 class="proj__title">Global Sales<br>Story.</h3>
+                <p class="proj__sub">Tableau Dashboards · $12.6M Sales Data</p>
+                <p class="proj__desc">
+                  Full pipeline across $12.6M in global sales (2019–2022), 7 regions,
+                  17 categories. Five interactive Tableau dashboards with drill-through.
+                  Disproved the assumption that higher discounts drive higher volume.
+                </p>
+                <div class="proj__nums">
+                  <div><b>$12.6M</b><i>analysed</i></div>
+                  <div><b>7</b><i>regions</i></div>
+                  <div><b>5</b><i>dashboards</i></div>
+                </div>
+                <div class="proj__chips">
+                  <span>Tableau</span><span>SQL</span><span>EDA</span><span>Statistical Testing</span>
+                </div>
+              </div>
+            </div>
+            <div class="proj__index">03</div>
+          </div>
+        </article>
+
+        <!-- ── Project 4 ── -->
+        <article class="proj" data-proj="4">
+          <div class="proj__sticky">
+            <div class="proj__bg proj__bg--4" data-depth="20"></div>
+            <canvas class="proj__viz" id="viz4" data-viz="donut"></canvas>
+            <div class="proj__shapes proj__shapes--4" data-depth="-40"></div>
+            <div class="proj__grid"></div>
+            <div class="proj__mask"></div>
+            <div class="proj__camera" data-camera>
+              <div class="proj__inner">
+                <div class="proj__meta">
+                  <span>Marriott International</span>
+                  <span>2024</span>
+                </div>
+                <h3 class="proj__title">Loyalty<br>Research.</h3>
+                <p class="proj__sub">Statistical Research · Mixed Methods</p>
+                <p class="proj__desc">
+                  Mixed-methods research framework for Marriott — 5,000+ respondents at 95% CI.
+                  PCA / Varimax, Ward's Cluster Analysis, ANOVA, MLR, Chi-Square across
+                  Consumer, Corporate, and Home Office segments.
+                </p>
+                <div class="proj__nums">
+                  <div><b>5K+</b><i>respondents</i></div>
+                  <div><b>95%</b><i>confidence</i></div>
+                  <div><b>3</b><i>segments</i></div>
+                </div>
+                <div class="proj__chips">
+                  <span>SPSS</span><span>Factor Analysis</span><span>ANOVA</span><span>Regression</span><span>Chi-Square</span>
+                </div>
+              </div>
+            </div>
+            <div class="proj__index">04</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           SKILLS GALAXY
+      ════════════════════════════════════════ -->
+      <section class="scene galaxy" id="skills">
+        <canvas class="galaxy__canvas" id="galaxyCanvas"></canvas>
+        <div class="galaxy__content">
+          <p class="section-num">03 / Stack</p>
+          <h2 class="section-display">A constellation<br>of <em>tools.</em></h2>
+
+          <div class="galaxy__columns">
+            <div class="gcol">
+              <h4>Code</h4>
+              <p>Python · SQL · R · pandas · NumPy · scikit-learn · matplotlib · seaborn · Jupyter</p>
+            </div>
+            <div class="gcol">
+              <h4>Models</h4>
+              <p>XGBoost · LightGBM · Random Forest · Gradient Boosting · K-Means · GMM · Logistic Regression · Neural Networks</p>
+            </div>
+            <div class="gcol">
+              <h4>AI / NLP</h4>
+              <p>OpenClaw · Ollama · Qwen3.5 397B · LLM Integration · Prompt Engineering · Agentic Workflows · ReAct · LangChain</p>
+            </div>
+            <div class="gcol">
+              <h4>Workflow</h4>
+              <p>Feature Engineering · 10-fold CV · A/B Testing · Hyperparameter Tuning · AUC / RMSE / F1 · Experiment Tracking</p>
+            </div>
+            <div class="gcol">
+              <h4>Deploy</h4>
+              <p>AWS SageMaker · Streamlit · Dataiku · ETL Pipelines · Git · Docker · MLflow · API Integration</p>
+            </div>
+            <div class="gcol">
+              <h4>BI</h4>
+              <p>Tableau · Power BI · EDA · SPSS · Excel · CRM · Data Governance · Quality &amp; Integrity</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           JOURNEY — horizontal-feel timeline
+      ════════════════════════════════════════ -->
+      <section class="scene journey" id="journey">
+        <div class="journey__intro">
+          <p class="section-num">04 / Journey</p>
+          <h2 class="section-display">Eight years.<br>Four chapters.</h2>
+        </div>
+
+        <div class="journey__rail">
+          <div class="rail-card" data-camera>
+            <div class="rail-card__year">2025 — Present</div>
+            <h3 class="rail-card__role">AI Systems Developer</h3>
+            <p class="rail-card__co">Self-Initiated · Singapore</p>
+            <p class="rail-card__body">
+              Designing and deploying agentic AI systems from the ground up — not just calling APIs,
+              but architecting reasoning, memory, and autonomous action.
+            </p>
+          </div>
+
+          <div class="rail-card" data-camera>
+            <div class="rail-card__year">2023 — 2025</div>
+            <h3 class="rail-card__role">Senior Robotics &amp; STEM Coach</h3>
+            <p class="rail-card__co">Brainery Code · Singapore</p>
+            <p class="rail-card__body">
+              Two years of daily practice in something data science values as much as Python:
+              translating complex technical ideas to people who don't share your background.
+              Taught 100+ students aged 6–16 across Python, Roblox Studio, LEGO Robotics.
+            </p>
+          </div>
+
+          <div class="rail-card" data-camera>
+            <div class="rail-card__year">2019 — 2022</div>
+            <h3 class="rail-card__role">Operation Manager</h3>
+            <p class="rail-card__co">Stylar Digital Pte. Ltd. · Myanmar</p>
+            <p class="rail-card__body">
+              Where I built my instinct for analytical thinking in a real business context.
+              Used data analysis and trend forecasting to guide planning, budgeting, and resource allocation —
+              translating raw operational data into recommendations leadership could act on.
+            </p>
+          </div>
+
+          <div class="rail-card" data-camera>
+            <div class="rail-card__year">2018 — 2019</div>
+            <h3 class="rail-card__role">Loyalty Program Coordinator</h3>
+            <p class="rail-card__co">Pan Pacific Hotels Group · Myanmar</p>
+            <p class="rail-card__body">
+              The role that first got me thinking seriously about data. Owned the full loyalty
+              programme lifecycle: CRM database architecture, ETL workflow design, governance.
+              Contributed directly to 2,000+ pre-registrations.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           EDUCATION
+      ════════════════════════════════════════ -->
+      <section class="scene education">
+        <div class="container">
+          <p class="section-num">05 / Foundations</p>
+          <h2 class="section-display">Where it<br>was built.</h2>
+
+          <div class="edu-row">
+            <div class="edu-row__year">2022 — 2025</div>
+            <div class="edu-row__main">
+              <h3>BSc Data Science &amp; Business Analytics</h3>
+              <p>University of London · Singapore</p>
+              <p class="edu-row__detail">
+                Machine Learning · Statistical Modelling · Business Analytics ·
+                Database Management · Data Visualisation · Statistical Research Methods
+              </p>
+            </div>
+          </div>
+
+          <div class="edu-row">
+            <div class="edu-row__year">2012 — 2016</div>
+            <div class="edu-row__main">
+              <h3>BA Tourism Studies</h3>
+              <p>National Management Degree College · Myanmar</p>
+            </div>
+          </div>
+
+          <div class="edu-row">
+            <div class="edu-row__year">Certified</div>
+            <div class="edu-row__main">
+              <h3>Dataiku Core Designer</h3>
+              <p>Dataiku Academy</p>
+              <p class="edu-row__detail">
+                Currently expanding — AWS · PyTorch · Docker
+              </p>
+            </div>
+          </div>
+
+          <div class="languages">
+            <h4>Languages</h4>
+            <div class="lang-row">
+              <div><b>English</b><i>Professional</i></div>
+              <div><b>Burmese</b><i>Native</i></div>
+              <div><b>Japanese</b><i>Conversational</i></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════════════
+           CONTACT
+      ════════════════════════════════════════ -->
+      <section class="scene contact" id="contact">
+        <canvas class="contact__canvas" id="contactCanvas"></canvas>
+        <div class="contact__inner">
+          <p class="section-num">06 / Contact</p>
+          <h2 class="contact__display">
+            <span class="word" data-word>Let's</span>
+            <span class="word" data-word>build</span>
+            <span class="word word--accent" data-word>something.</span>
+          </h2>
+          <p class="contact__sub">
+            Open to Data Science, ML Engineering, and Analytics roles —
+            in Singapore and globally.
+          </p>
+
+          <a href="mailto:bonoerikk@gmail.com" class="contact__mail">
+            <span>bonoerikk@gmail.com</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="13 6 19 12 13 18"/>
+            </svg>
+          </a>
+
+          <div class="contact__row">
+            <a href="tel:+6590064760">+65 9006 4760</a>
+            <a href="https://github.com/Bo-Neau" target="_blank">github.com/Bo-Neau</a>
+            <span>Singapore</span>
+          </div>
+        </div>
+
+        <footer class="footer">
+          <span>© 2026 Lwin Moe Aung</span>
+          <span>Made in Singapore · Powered by data</span>
+        </footer>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
