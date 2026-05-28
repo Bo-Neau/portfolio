@@ -812,6 +812,22 @@ html { scroll-behavior: smooth; }
   transition-duration: 0.06s;
 }
 
+.proj__link {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: opacity 0.2s, letter-spacing 0.2s;
+}
+.proj__link:hover {
+  opacity: 1;
+  letter-spacing: 0.2em;
+}
+
 .proj__index {
   position: absolute;
   bottom: 40px;
