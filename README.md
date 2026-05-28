@@ -1,7 +1,4 @@
-# Lwin Moe Aung — Cinematic Portfolio
-
-A **3D-parallax, scroll-driven** portfolio inspired by editorial film aesthetics (think Nikola Radeski).
-Mouse moves the camera. Scroll plays the movie.
+# Lwin Moe Aung — Portfolio
 
 ---
 
