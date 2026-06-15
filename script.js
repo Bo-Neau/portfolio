@@ -1041,6 +1041,119 @@ setupViz('viz4', {
   }
 });
 
+/* ── viz5: Churn — SHAP feature bars + ROC curve climbing to AUC 0.86 ── */
+setupViz('viz5', {
+  init(W, H) {
+    /* SHAP global importance (ordered) — Contract & Dependents lead */
+    const features = [
+      { label: 'Contract',        val: 1.00 },
+      { label: 'Dependents',      val: 0.82 },
+      { label: 'Tenure',          val: 0.71 },
+      { label: 'MonthlyCharges',  val: 0.58 },
+      { label: 'InternetService', val: 0.46 },
+      { label: 'TechSupport',     val: 0.34 },
+      { label: 'PaymentMethod',   val: 0.25 },
+    ];
+    /* ROC points approaching AUC ≈ 0.86 (concave curve above diagonal) */
+    const roc = [];
+    for (let i = 0; i <= 40; i++) {
+      const fpr = i / 40;
+      const tpr = Math.pow(fpr, 0.34);   /* concave → high AUC */
+      roc.push({ fpr, tpr });
+    }
+    return { features, roc, draw: 0, t: 0 };
+  },
+  tick(ctx, W, H, s) {
+    ctx.clearRect(0, 0, W, H);
+    s.draw = lerp(s.draw, 1, 0.02);
+    s.t += 0.02;
+
+    /* === LEFT: SHAP horizontal feature-importance bars === */
+    const bx = W * 0.07, by = H * 0.20;
+    const bw = W * 0.34, rowH = H * 0.085, gap = rowH * 0.42;
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgba(244,240,230,0.7)';
+    ctx.font = `${Math.max(9, W*0.0065)}px monospace`;
+    ctx.textAlign = 'left';
+    ctx.fillText('SHAP · mean |impact|', bx, by - H*0.05);
+    s.features.forEach((f, i) => {
+      const y = by + i * (rowH + gap);
+      const len = bw * f.val * s.draw;
+      const strong = i < 2;
+      const grad = ctx.createLinearGradient(bx, 0, bx + len, 0);
+      grad.addColorStop(0, strong ? 'rgba(255,87,34,0.95)' : 'rgba(108,213,255,0.7)');
+      grad.addColorStop(1, strong ? 'rgba(225,60,90,0.6)'  : 'rgba(108,213,255,0.18)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(bx, y, len, rowH);
+      /* label */
+      ctx.fillStyle = 'rgba(244,240,230,0.78)';
+      ctx.font = `${Math.max(8, W*0.0058)}px monospace`;
+      ctx.textAlign = 'left';
+      ctx.fillText(f.label, bx + 6, y + rowH / 2);
+      /* #2 highlight tag on Dependents */
+      if (i === 1) {
+        ctx.fillStyle = '#ff5722';
+        ctx.textAlign = 'left';
+        ctx.fillText('◂ #2 hidden signal', bx + len + 8, y + rowH / 2);
+      }
+    });
+
+    /* === RIGHT: ROC curve === */
+    const rx = W * 0.58, ry = H * 0.22;
+    const rw = W * 0.32, rh = H * 0.50;
+    /* axes box */
+    ctx.strokeStyle = 'rgba(244,240,230,0.18)';
+    ctx.lineWidth = 0.8;
+    ctx.strokeRect(rx, ry, rw, rh);
+    /* diagonal baseline */
+    ctx.strokeStyle = 'rgba(244,240,230,0.25)';
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath();
+    ctx.moveTo(rx, ry + rh);
+    ctx.lineTo(rx + rw, ry);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    /* the curve (progressive draw) */
+    const n = Math.floor(s.roc.length * s.draw);
+    ctx.beginPath();
+    ctx.moveTo(rx, ry + rh);
+    for (let i = 0; i <= n; i++) {
+      const p = s.roc[i];
+      if (!p) break;
+      ctx.lineTo(rx + p.fpr * rw, ry + rh - p.tpr * rh);
+    }
+    ctx.strokeStyle = '#ff5722';
+    ctx.lineWidth = 2;
+    ctx.shadowColor = '#ff5722';
+    ctx.shadowBlur = 12;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    /* fill under curve */
+    ctx.lineTo(rx + (s.roc[n] ? s.roc[n].fpr : 0) * rw, ry + rh);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,87,34,0.10)';
+    ctx.fill();
+    /* AUC readout */
+    ctx.fillStyle = '#ff5722';
+    ctx.font = `${Math.max(13, W*0.013)}px monospace`;
+    ctx.textAlign = 'right';
+    ctx.fillText(`AUC ${(0.86 * s.draw).toFixed(2)}`, rx + rw - 8, ry + rh - 14);
+    ctx.fillStyle = 'rgba(244,240,230,0.5)';
+    ctx.font = `${Math.max(8, W*0.0055)}px monospace`;
+    ctx.fillText('ROC · holdout', rx + rw - 8, ry + rh - 30);
+    /* axis labels */
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(244,240,230,0.45)';
+    ctx.fillText('FPR →', rx, ry + rh + 14);
+
+    /* Floating stat — revenue at risk */
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(244,240,230,0.55)';
+    ctx.font = `${Math.max(10, W*0.0075)}px monospace`;
+    ctx.fillText('7,043 customers  ·  M2M×Fiber 54.6% churn  ·  $1.6M ARR at risk', W * 0.07, H * 0.92);
+  }
+});
+
 
 /* ════════════════════════════════════════════════
    11. CONTACT CANVAS — single radial pulse

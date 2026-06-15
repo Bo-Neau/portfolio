@@ -53,7 +53,7 @@
             <div class="hero__meta">
               <span class="meta-line">Lat 1.3521° N</span>
               <span class="meta-line">Lon 103.8198° E</span>
-              <span class="meta-line">Singapore · 2026</span>
+              <span class="meta-line">Bangkok / Singapore · 2026</span>
             </div>
           </div>
 
@@ -116,9 +116,11 @@
       <section class="scene stats">
         <div class="stats__marquee" data-marquee>
           <div class="stats__row">
-            <span class="stats__big">607K+ records</span>
+            <span class="stats__big">$1.6M at risk</span>
             <span class="stats__sep">·</span>
-            <span class="stats__big">AUC&nbsp;0.93</span>
+            <span class="stats__big">AUC&nbsp;0.86</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">607K+ records</span>
             <span class="stats__sep">·</span>
             <span class="stats__big">Silhouette&nbsp;0.891</span>
             <span class="stats__sep">·</span>
@@ -130,9 +132,11 @@
             <span class="stats__sep">·</span>
           </div>
           <div class="stats__row" aria-hidden="true">
-            <span class="stats__big">607K+ records</span>
+            <span class="stats__big">$1.6M at risk</span>
             <span class="stats__sep">·</span>
-            <span class="stats__big">AUC&nbsp;0.93</span>
+            <span class="stats__big">AUC&nbsp;0.86</span>
+            <span class="stats__sep">·</span>
+            <span class="stats__big">607K+ records</span>
             <span class="stats__sep">·</span>
             <span class="stats__big">Silhouette&nbsp;0.891</span>
             <span class="stats__sep">·</span>
@@ -152,8 +156,50 @@
       <section class="scene projects" id="projects">
         <div class="projects__intro">
           <p class="section-num">02 / Selected Work</p>
-          <h2 class="section-display">Four scenes,<br>one practice.</h2>
+          <h2 class="section-display">Five scenes,<br>one practice.</h2>
         </div>
+
+        <!-- ── Project 0 · Churn (flagship) ── -->
+        <article class="proj" data-proj="5">
+          <div class="proj__sticky">
+            <div class="proj__bg proj__bg--5" data-depth="20"></div>
+            <canvas class="proj__viz" id="viz5" data-viz="churn"></canvas>
+            <div class="proj__shapes proj__shapes--2" data-depth="-40"></div>
+            <div class="proj__grid"></div>
+            <div class="proj__mask"></div>
+            <div class="proj__camera" data-camera>
+              <div class="proj__inner">
+                <div class="proj__meta">
+                  <span>Freelance</span>
+                  <span>2026</span>
+                </div>
+                <h3 class="proj__title">Customer Churn<br>Prediction.</h3>
+                <p class="proj__sub">XGBoost · SHAP · Streamlit · 7,043 customers</p>
+                <p class="proj__desc">
+                  Built a full 10-phase churn prediction pipeline on 7,043 IBM Telco customers —
+                  ETL, data wrangling, feature engineering, training, and evaluation. XGBoost
+                  achieved AUC 0.86 on holdout with zero label leakage, confirmed by a SHAP
+                  interpretability audit, deployed as a 5-tab live Streamlit dashboard.
+                  Quantified $1.6M in annualised revenue at risk from the month-to-month base and
+                  flagged the M2M × Fiber Optic segment (2,128 customers, 54.6% churn, ~$11M ARR)
+                  as the highest-priority retention target. Delivered three ROI-quantified
+                  interventions totalling $1.5M+ in defended revenue. Surfaced "Dependents" as
+                  SHAP feature #2 — a 3.9× churn spread invisible to univariate EDA.
+                </p>
+                <div class="proj__nums">
+                  <div><b>0.86</b><i>AUC holdout</i></div>
+                  <div><b>$1.6M</b><i>revenue at risk</i></div>
+                  <div><b>$1.5M+</b><i>defended</i></div>
+                </div>
+                <div class="proj__chips">
+                  <span>XGBoost</span><span>SHAP</span><span>Streamlit</span><span>Python</span><span>DuckDB</span>
+                </div>
+                <a href="https://github.com/Bo-Neau" target="_blank" rel="noopener" class="proj__link">View Project →</a>
+              </div>
+            </div>
+            <div class="proj__index">01</div>
+          </div>
+        </article>
 
         <!-- ── Project 1 ── -->
         <article class="proj" data-proj="1">
@@ -190,7 +236,7 @@
                 </div>
               </div>
             </div>
-            <div class="proj__index">01</div>
+            <div class="proj__index">02</div>
           </div>
         </article>
 
@@ -230,7 +276,7 @@
                 <a href="https://bo-neau.github.io/machine-learning-project.github.io/" target="_blank" rel="noopener" class="proj__link">View Project →</a>
               </div>
             </div>
-            <div class="proj__index">02</div>
+            <div class="proj__index">03</div>
           </div>
         </article>
 
@@ -270,7 +316,7 @@
                 <a href="https://bo-neau.github.io/Business-Analytics.io/" target="_blank" rel="noopener" class="proj__link">View Project →</a>
               </div>
             </div>
-            <div class="proj__index">03</div>
+            <div class="proj__index">04</div>
           </div>
         </article>
 
@@ -309,7 +355,7 @@
                 </div>
               </div>
             </div>
-            <div class="proj__index">04</div>
+            <div class="proj__index">05</div>
           </div>
         </article>
       </section>
@@ -330,19 +376,19 @@
             </div>
             <div class="gcol">
               <h4>Models</h4>
-              <p>XGBoost · LightGBM · Random Forest · Gradient Boosting · K-Means · GMM · Logistic Regression · Neural Networks</p>
+              <p>XGBoost · LightGBM · Random Forest · Gradient Boosting · K-Means · GMM · Deep Learning · Neural Networks · TensorFlow · PyTorch</p>
             </div>
             <div class="gcol">
               <h4>AI / NLP</h4>
-              <p>OpenClaw · Ollama · Qwen3.5 397B · LLM Integration · Prompt Engineering · Agentic Workflows · ReAct · LangChain</p>
+              <p>Ollama · LLM Integration · Prompt Engineering · Agentic Workflows · Retrieval-Augmented Generation · LangChain-style Frameworks</p>
             </div>
             <div class="gcol">
               <h4>Workflow</h4>
-              <p>Feature Engineering · 10-fold CV · A/B Testing · Hyperparameter Tuning · AUC / RMSE / F1 · Experiment Tracking</p>
+              <p>Feature Engineering · Cross-Validation · A/B Testing · Hyperparameter Tuning · SHAP · Model Interpretability · Model Monitoring · Data Drift</p>
             </div>
             <div class="gcol">
               <h4>Deploy</h4>
-              <p>AWS SageMaker · Streamlit · Dataiku · ETL Pipelines · Git · Docker · MLflow · API Integration</p>
+              <p>AWS SageMaker · Streamlit · Dataiku · ETL Pipelines · DuckDB · Git · Docker · MLflow · API Integration</p>
             </div>
             <div class="gcol">
               <h4>BI</h4>
@@ -387,7 +433,7 @@
 
           <div class="rail-card" data-camera>
             <div class="rail-card__year">2019 — 2022</div>
-            <h3 class="rail-card__role">Operation Manager</h3>
+            <h3 class="rail-card__role">Operations Manager</h3>
             <p class="rail-card__co">Stylar Digital Pte. Ltd. · Myanmar</p>
             <p class="rail-card__body">
               Where I built my instinct for analytical thinking in a real business context.
@@ -398,7 +444,7 @@
 
           <div class="rail-card" data-camera>
             <div class="rail-card__year">2018 — 2019</div>
-            <h3 class="rail-card__role">Loyalty Program Coordinator</h3>
+            <h3 class="rail-card__role">Loyalty Programme Coordinator</h3>
             <p class="rail-card__co">Pan Pacific Hotels Group · Myanmar</p>
             <p class="rail-card__body">
               The role that first got me thinking seriously about data. Owned the full loyalty
@@ -440,10 +486,10 @@
           <div class="edu-row">
             <div class="edu-row__year">Certified</div>
             <div class="edu-row__main">
-              <h3>Dataiku Core Designer</h3>
-              <p>Dataiku Academy</p>
+              <h3>Dataiku Core Designer · AWS MLA-C01 <em>(in progress)</em></h3>
+              <p>Dataiku Academy · AWS Certified Machine Learning Associate</p>
               <p class="edu-row__detail">
-                Currently expanding — AWS · PyTorch · Docker
+                Currently expanding — AWS Cloud Deployment · PyTorch · Deep Learning · Docker · Containerisation
               </p>
             </div>
           </div>
@@ -473,7 +519,7 @@
           </h2>
           <p class="contact__sub">
             Open to Data Science, ML Engineering, and Analytics roles —
-            in Singapore and globally.
+            in Bangkok, Singapore, and globally.
           </p>
 
           <a href="mailto:bonoerikk@gmail.com" class="contact__mail">
@@ -487,7 +533,7 @@
           <div class="contact__row">
             <a href="tel:+6590064760">+65 9006 4760</a>
             <a href="https://github.com/Bo-Neau" target="_blank">github.com/Bo-Neau</a>
-            <span>Singapore</span>
+            <span>Bangkok / Singapore</span>
           </div>
         </div>
 

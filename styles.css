@@ -661,6 +661,14 @@ html { scroll-behavior: smooth; }
     linear-gradient(170deg, #050a0c 0%, #0a1814 60%, #061a18 100%);
 }
 
+.proj__bg--5 {
+  background:
+    radial-gradient(ellipse 70% 60% at 35% 35%, rgba(255, 87, 34, 0.30) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 70% at 78% 72%, rgba(225, 60, 90, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 88% 18%, rgba(108, 213, 255, 0.10) 0%, transparent 55%),
+    linear-gradient(155deg, #100608 0%, #240a12 60%, #1c0810 100%);
+}
+
 /* Decorative shapes per project */
 .proj__shapes {
   position: absolute;
