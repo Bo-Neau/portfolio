@@ -1154,6 +1154,147 @@ setupViz('viz5', {
   }
 });
 
+/* ── viz6: Production pipeline — Airflow DAG + Spark partitions + Docker run ── */
+setupViz('viz6', {
+  init(W, H) {
+    /* Airflow DAG: 6 stages laid left→right, each a task node */
+    const stages = ['Ingest', 'Clean', 'Feature', 'Train', 'Score', 'Deploy'];
+    const nodes = stages.map((label, i) => ({
+      label,
+      x: W * (0.10 + i * 0.155),
+      y: H * 0.34,
+      i,
+    }));
+    /* Sequential edges + one branch (parallel feature path) */
+    const edges = [];
+    for (let i = 0; i < nodes.length - 1; i++) edges.push({ a: i, b: i + 1 });
+    /* Spark partition lanes underneath — packets streaming through */
+    const lanes = Array.from({ length: 5 }, (_, r) => ({
+      y: H * (0.62 + r * 0.065),
+      packets: Array.from({ length: 4 }, () => ({ x: rnd(0, W), sp: rnd(0.8, 2.0) })),
+    }));
+    return { nodes, edges, lanes, t: 0, active: 0, pulse: 0 };
+  },
+  tick(ctx, W, H, s) {
+    ctx.clearRect(0, 0, W, H);
+    s.t += 0.02;
+    s.pulse += 0.04;
+    /* advance the "currently running" task every ~50 frames */
+    s.active = Math.floor(s.t * 0.6) % s.nodes.length;
+
+    /* === Airflow DAG === */
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    /* edges */
+    s.edges.forEach(e => {
+      const a = s.nodes[e.a], b = s.nodes[e.b];
+      const done = e.b <= s.active;
+      ctx.strokeStyle = done ? 'rgba(130, 208, 168, 0.55)' : 'rgba(244,240,230,0.15)';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(a.x + W * 0.035, a.y);
+      ctx.lineTo(b.x - W * 0.035, b.y);
+      ctx.stroke();
+      /* flow packet on the edge into the active node */
+      if (e.b === s.active) {
+        const tt = (s.t * 0.5) % 1;
+        const px = lerp(a.x + W * 0.035, b.x - W * 0.035, tt);
+        ctx.fillStyle = '#6cd5ff';
+        ctx.beginPath();
+        ctx.arc(px, a.y, 3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+    /* nodes */
+    s.nodes.forEach(n => {
+      const done = n.i < s.active;
+      const running = n.i === s.active;
+      const rw = W * 0.07, rh = H * 0.085;
+      ctx.lineWidth = 1.4;
+      if (running) {
+        const a = 0.5 + Math.sin(s.pulse) * 0.3;
+        ctx.fillStyle = `rgba(255, 87, 34, ${0.18 + a * 0.2})`;
+        ctx.strokeStyle = '#ff5722';
+        ctx.shadowColor = '#ff5722';
+        ctx.shadowBlur = 16;
+      } else if (done) {
+        ctx.fillStyle = 'rgba(130, 208, 168, 0.14)';
+        ctx.strokeStyle = 'rgba(130, 208, 168, 0.7)';
+      } else {
+        ctx.fillStyle = 'rgba(8,8,11,0.5)';
+        ctx.strokeStyle = 'rgba(244,240,230,0.25)';
+      }
+      ctx.beginPath();
+      ctx.rect(n.x - rw / 2, n.y - rh / 2, rw, rh);
+      ctx.fill();
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      /* label */
+      ctx.fillStyle = running ? '#ff5722' : (done ? 'rgba(130,208,168,0.9)' : 'rgba(244,240,230,0.5)');
+      ctx.font = `${Math.max(8, W * 0.0058)}px monospace`;
+      ctx.fillText(n.label, n.x, n.y);
+      /* green check on done */
+      if (done) {
+        ctx.fillStyle = 'rgba(130,208,168,0.9)';
+        ctx.fillText('✓', n.x + rw / 2 - 6, n.y - rh / 2 + 6);
+      }
+    });
+    /* DAG title */
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(244,240,230,0.7)';
+    ctx.font = `${Math.max(9, W * 0.0065)}px monospace`;
+    ctx.fillText('Airflow DAG · propensity_pipeline', W * 0.07, H * 0.18);
+
+    /* === Spark partition lanes === */
+    ctx.fillStyle = 'rgba(244,240,230,0.5)';
+    ctx.font = `${Math.max(8, W * 0.0055)}px monospace`;
+    ctx.fillText('PySpark · distributed partitions', W * 0.07, H * 0.54);
+    s.lanes.forEach((lane, r) => {
+      ctx.strokeStyle = 'rgba(108, 213, 255, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(W * 0.07, lane.y);
+      ctx.lineTo(W * 0.62, lane.y);
+      ctx.stroke();
+      lane.packets.forEach(p => {
+        p.x += p.sp;
+        if (p.x > W * 0.62) p.x = W * 0.07;
+        const fade = clamp((W * 0.62 - p.x) / (W * 0.2), 0.2, 1);
+        ctx.fillStyle = `rgba(108, 213, 255, ${fade})`;
+        ctx.fillRect(p.x, lane.y - 2, W * 0.02, 4);
+      });
+    });
+
+    /* === Docker panel (bottom-right) — container status === */
+    const px = W * 0.68, py = H * 0.58, pw = W * 0.26, ph = H * 0.30;
+    ctx.fillStyle = 'rgba(8,8,11,0.7)';
+    ctx.fillRect(px, py, pw, ph);
+    ctx.strokeStyle = 'rgba(70, 130, 180, 0.5)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(px, py, pw, ph);
+    ctx.fillStyle = 'rgba(108, 213, 255, 0.9)';
+    ctx.font = `${Math.max(9, W * 0.0065)}px monospace`;
+    ctx.textAlign = 'left';
+    ctx.fillText('🐳 docker compose', px + 12, py + ph * 0.16);
+    const services = ['spark-master', 'spark-worker', 'airflow-web', 'scheduler'];
+    services.forEach((svc, i) => {
+      const y = py + ph * (0.36 + i * 0.16);
+      const up = ((Math.floor(s.t) + i) % 8) !== 0;  /* occasional flicker */
+      ctx.fillStyle = up ? 'rgba(130,208,168,0.9)' : 'rgba(255,158,122,0.9)';
+      ctx.beginPath();
+      ctx.arc(px + 16, y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(244,240,230,0.7)';
+      ctx.font = `${Math.max(8, W * 0.0052)}px monospace`;
+      ctx.fillText(svc, px + 28, y);
+      ctx.fillStyle = up ? 'rgba(130,208,168,0.7)' : 'rgba(255,158,122,0.7)';
+      ctx.textAlign = 'right';
+      ctx.fillText(up ? 'Up' : '…', px + pw - 12, y);
+      ctx.textAlign = 'left';
+    });
+  }
+});
+
 
 /* ════════════════════════════════════════════════
    11. CONTACT CANVAS — single radial pulse
