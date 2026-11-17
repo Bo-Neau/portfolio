@@ -120,7 +120,7 @@
             <span class="stats__sep">·</span>
             <span class="stats__big">AUC&nbsp;0.86</span>
             <span class="stats__sep">·</span>
-            <span class="stats__big">607K+ records</span>
+            <span class="stats__big">42M events</span>
             <span class="stats__sep">·</span>
             <span class="stats__big">Silhouette&nbsp;0.891</span>
             <span class="stats__sep">·</span>
@@ -136,7 +136,7 @@
             <span class="stats__sep">·</span>
             <span class="stats__big">AUC&nbsp;0.86</span>
             <span class="stats__sep">·</span>
-            <span class="stats__big">607K+ records</span>
+            <span class="stats__big">42M events</span>
             <span class="stats__sep">·</span>
             <span class="stats__big">Silhouette&nbsp;0.891</span>
             <span class="stats__sep">·</span>
@@ -156,7 +156,7 @@
       <section class="scene projects" id="projects">
         <div class="projects__intro">
           <p class="section-num">02 / Selected Work</p>
-          <h2 class="section-display">Six scenes,<br>one practice.</h2>
+          <h2 class="section-display">Seven scenes,<br>one practice.</h2>
         </div>
 
         <!-- ── Project 0 · Churn (flagship) ── -->
@@ -194,7 +194,7 @@
                 <div class="proj__chips">
                   <span>XGBoost</span><span>SHAP</span><span>Streamlit</span><span>Python</span><span>DuckDB</span>
                 </div>
-                <a href="https://github.com/Bo-Neau" target="_blank" rel="noopener" class="proj__link">View Project →</a>
+                <a href="https://github.com/Bo-Neau/runbook" target="_blank" rel="noopener" class="proj__link">View Project →</a>
               </div>
             </div>
             <div class="proj__index">01</div>
@@ -213,30 +213,74 @@
               <div class="proj__inner">
                 <div class="proj__meta">
                   <span>Freelance</span>
-                  <span>2025</span>
+                  <span>2026</span>
                 </div>
-                <h3 class="proj__title">Personal AI<br>Assistant.</h3>
-                <p class="proj__sub">NLP &amp; Agentic System · OpenClaw + Ollama</p>
+                <h3 class="proj__title">Beatrice.</h3>
+                <p class="proj__sub">Autonomous AI Butler · Python · Claude · Telegram</p>
                 <p class="proj__desc">
-                  Built and deployed a locally hosted NLP-powered agentic AI assistant using OpenClaw
-                  and Qwen3.5 397B via Ollama — zero API cost, full local deployment — autonomously
-                  handling text processing, task management, research, and document drafting.
-                  Engineered a multi-step reasoning pipeline with tool-use, contextual memory, and
-                  text preprocessing modules; deployed as a local API integration between the model
-                  and application layer. Currently extending to outbound messaging automation and
-                  ETL-style data pipelines.
+                  A personal AI butler that runs continuously as a macOS service — not a chat wrapper
+                  but a standing system with its own memory, judgement and health monitoring.
+                  37 Python modules and ~23,500 lines: a Telegram conversational interface, a Flask
+                  dashboard, SQLite-backed conversation and action logs, and a watchdog that revives
+                  failed processes and raises an alert when the model layer goes down. Above the engine
+                  sit durable standing orders — corrections become lasting rules read at every point
+                  where she decides or speaks — a learning store that separates lasting facts from
+                  passing events, read-only IMAP email triage driven by rules written in plain English,
+                  long-running goals decomposed into steps, rationed background web watches, and an
+                  attentiveness layer with explicit limits. Backed by a 136-case logic suite plus
+                  model-backed judgement cases that run nightly against an invented household.
                 </p>
                 <div class="proj__nums">
-                  <div><b>Qwen3.5</b><i>397B parameters</i></div>
-                  <div><b>$0</b><i>API cost</i></div>
-                  <div><b>Local</b><i>full control</i></div>
+                  <div><b>136</b><i>logic tests passing</i></div>
+                  <div><b>37</b><i>Python modules</i></div>
+                  <div><b>24/7</b><i>self-healing service</i></div>
                 </div>
                 <div class="proj__chips">
-                  <span>OpenClaw</span><span>Ollama</span><span>Prompt Engineering</span><span>ReAct</span><span>Tool-use</span>
+                  <span>Python</span><span>Claude</span><span>Telegram</span><span>Flask</span><span>SQLite</span><span>Agentic AI</span><span>LaunchAgent</span>
                 </div>
               </div>
             </div>
             <div class="proj__index">02</div>
+          </div>
+        </article>
+
+        <!-- ── AccountAI Agent ── -->
+        <article class="proj" data-proj="7">
+          <div class="proj__sticky">
+            <div class="proj__bg proj__bg--7" data-depth="20"></div>
+            <canvas class="proj__viz" id="viz7" data-viz="ledger"></canvas>
+            <div class="proj__shapes proj__shapes--3" data-depth="-40"></div>
+            <div class="proj__grid"></div>
+            <div class="proj__mask"></div>
+            <div class="proj__camera" data-camera>
+              <div class="proj__inner">
+                <div class="proj__meta">
+                  <span>Personal Project</span>
+                  <span>2026</span>
+                </div>
+                <h3 class="proj__title">AccountAI<br>Agent.</h3>
+                <p class="proj__sub">Autonomous Accounting Agent · Claude Sonnet 4</p>
+                <p class="proj__desc">
+                  Photograph a bill or purchase order and the agent does the rest: Claude&#39;s vision
+                  model reads every field, classifies the document against a chart of accounts,
+                  validates that subtotal plus tax reconciles to the total, generates balanced
+                  double-entry journal entries, and updates a live Profit &amp; Loss statement — with a
+                  human approval gate before anything posts to the ledger. Built as a single
+                  client-side application with no backend: the browser calls the Anthropic API
+                  directly, so no document or key ever passes through a server I control.
+                </p>
+                <div class="proj__nums">
+                  <div><b>Sonnet 4</b><i>vision + text</i></div>
+                  <div><b>7 steps</b><i>photo to P&amp;L</i></div>
+                  <div><b>Zero</b><i>backend</i></div>
+                </div>
+                <div class="proj__chips">
+                  <span>Claude Sonnet 4</span><span>Anthropic API</span><span>Vision / OCR</span><span>JavaScript</span><span>Double-Entry</span>
+                </div>
+                <a href="https://bo-neau.github.io/accountai-agent/" target="_blank" rel="noopener" class="proj__link">View Live Demo →</a>
+              </div>
+            </div>
+            <div class="proj__index">03</div>
           </div>
         </article>
 
@@ -255,9 +299,9 @@
                   <span>2025</span>
                 </div>
                 <h3 class="proj__title">Customer Propensity<br>Pipeline.</h3>
-                <p class="proj__sub">Machine Learning · 607,056 records</p>
+                <p class="proj__sub">Machine Learning · 42M events</p>
                 <p class="proj__desc">
-                  Built a complete end-to-end ML pipeline on 607,056 records — ETL preprocessing,
+                  Built a complete end-to-end ML pipeline on 42,448,764 REES46 e-commerce events, aggregated to 9.24M session-level features — ETL preprocessing,
                   feature engineering (engagement, intent, and conversion scores), model training,
                   10-fold cross-validation, and deployment-ready CRM targeting recommendations.
                   Applied K-Means (silhouette 0.843) and GMM (silhouette 0.891) segmentation;
@@ -266,7 +310,7 @@
                   Outputs translated into tiered CRM strategies with full data governance documentation.
                 </p>
                 <div class="proj__nums">
-                  <div><b>0.93</b><i>AUC</i></div>
+                  <div><b>0.935</b><i>AUC</i></div>
                   <div><b>0.891</b><i>Silhouette</i></div>
                   <div><b>−50%</b><i>RMSE vs. baseline</i></div>
                 </div>
@@ -276,7 +320,7 @@
                 <a href="https://bo-neau.github.io/machine-learning-project.github.io/" target="_blank" rel="noopener" class="proj__link">View Project →</a>
               </div>
             </div>
-            <div class="proj__index">03</div>
+            <div class="proj__index">04</div>
           </div>
         </article>
 
@@ -316,7 +360,7 @@
                 <a href="https://bo-neau.github.io/customer-propensity-pipeline/" target="_blank" rel="noopener" class="proj__link">View Project →</a>
               </div>
             </div>
-            <div class="proj__index">04</div>
+            <div class="proj__index">05</div>
           </div>
         </article>
 
@@ -356,7 +400,7 @@
                 <a href="https://bo-neau.github.io/Business-Analytics.io/" target="_blank" rel="noopener" class="proj__link">View Project →</a>
               </div>
             </div>
-            <div class="proj__index">05</div>
+            <div class="proj__index">06</div>
           </div>
         </article>
 
@@ -395,7 +439,7 @@
                 </div>
               </div>
             </div>
-            <div class="proj__index">06</div>
+            <div class="proj__index">07</div>
           </div>
         </article>
       </section>
@@ -420,7 +464,7 @@
             </div>
             <div class="gcol">
               <h4>AI / NLP</h4>
-              <p>Ollama · LLM Integration · Prompt Engineering · Agentic Workflows · Retrieval-Augmented Generation · LangChain-style Frameworks</p>
+              <p>Claude (Anthropic API) · Ollama · LLM Integration · Agentic Workflows · Prompt Engineering · Retrieval-Augmented Generation · Tool-Use Pipelines</p>
             </div>
             <div class="gcol">
               <h4>Workflow</h4>

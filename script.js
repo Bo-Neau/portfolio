@@ -1295,6 +1295,107 @@ setupViz('viz6', {
   }
 });
 
+/* ── viz7: AccountAI — document scan, field extraction, balanced ledger ── */
+setupViz('viz7', {
+  init(W, H) {
+    const fields = ['Vendor', 'Date', 'Line items', 'Subtotal', 'VAT 7%', 'Total'];
+    const lines = [
+      { ac: '5100 Office Supplies', dr: 1200, cr: 0 },
+      { ac: '1510 VAT Input',       dr: 84,   cr: 0 },
+      { ac: '2100 Accounts Payable',dr: 0,    cr: 1284 }
+    ];
+    return { fields, lines, t: 0, scan: 0, revealed: 0 };
+  },
+  tick(ctx, W, H, s) {
+    ctx.clearRect(0, 0, W, H);
+    s.t += 0.02;
+    /* scan sweeps the document, then fields reveal one by one, then it resets */
+    const cycle = (s.t * 0.18) % 1;
+    s.scan = Math.min(1, cycle * 2.2);
+    s.revealed = Math.max(0, Math.min(s.fields.length, Math.floor((cycle - 0.45) * 14)));
+
+    /* ── document on the left ── */
+    const dx = W * 0.08, dy = H * 0.18, dw = W * 0.26, dh = H * 0.60;
+    ctx.fillStyle = 'rgba(244,240,230,0.05)';
+    ctx.fillRect(dx, dy, dw, dh);
+    ctx.strokeStyle = 'rgba(244,240,230,0.22)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(dx, dy, dw, dh);
+    /* text ruling */
+    ctx.fillStyle = 'rgba(244,240,230,0.13)';
+    for (let i = 0; i < 11; i++) {
+      const w = (i === 0 || i === 10) ? dw * 0.5 : dw * (0.55 + Math.sin(i * 1.7) * 0.25);
+      ctx.fillRect(dx + dw * 0.08, dy + dh * (0.10 + i * 0.075), w * 0.78, 3);
+    }
+    /* scan line */
+    const sy = dy + dh * s.scan;
+    const grad = ctx.createLinearGradient(dx, sy - 18, dx, sy + 18);
+    grad.addColorStop(0, 'rgba(130,208,168,0)');
+    grad.addColorStop(0.5, 'rgba(130,208,168,0.55)');
+    grad.addColorStop(1, 'rgba(130,208,168,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(dx, sy - 18, dw, 36);
+    ctx.strokeStyle = 'rgba(130,208,168,0.9)';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(dx, sy); ctx.lineTo(dx + dw, sy); ctx.stroke();
+
+    /* ── extracted fields in the middle ── */
+    const fx = W * 0.40;
+    ctx.font = `${Math.max(8, W * 0.0058)}px monospace`;
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    s.fields.forEach((f, i) => {
+      const y = dy + dh * (0.10 + i * 0.16);
+      const on = i < s.revealed;
+      ctx.fillStyle = on ? 'rgba(130,208,168,0.95)' : 'rgba(244,240,230,0.16)';
+      ctx.fillText(on ? '✓ ' + f : '· ' + f, fx, y);
+      if (on) {
+        ctx.strokeStyle = 'rgba(130,208,168,0.25)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(dx + dw, dy + dh * (0.10 + i * 0.075));
+        ctx.lineTo(fx - 8, y);
+        ctx.stroke();
+      }
+    });
+    ctx.fillStyle = 'rgba(244,240,230,0.55)';
+    ctx.font = `${Math.max(9, W * 0.0062)}px monospace`;
+    ctx.fillText('Claude Vision · field extraction', fx, dy - H * 0.05);
+
+    /* ── journal entry on the right ── */
+    const jx = W * 0.64, jy = dy + H * 0.06, jw = W * 0.29;
+    ctx.fillStyle = 'rgba(244,240,230,0.55)';
+    ctx.fillText('Double-entry journal', jx, dy - H * 0.05);
+    let dr = 0, cr = 0;
+    s.lines.forEach((ln, i) => {
+      const y = jy + i * H * 0.10;
+      const on = s.revealed >= s.fields.length;
+      ctx.font = `${Math.max(8, W * 0.0052)}px monospace`;
+      ctx.fillStyle = on ? 'rgba(244,240,230,0.82)' : 'rgba(244,240,230,0.18)';
+      ctx.fillText(ln.ac, jx, y);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = on ? (ln.dr ? 'rgba(108,213,255,0.95)' : 'rgba(212,178,122,0.95)')
+                         : 'rgba(244,240,230,0.18)';
+      ctx.fillText(ln.dr ? ln.dr.toLocaleString() : ln.cr.toLocaleString(), jx + jw, y);
+      ctx.textAlign = 'left';
+      if (on) { dr += ln.dr; cr += ln.cr; }
+    });
+    /* balance check */
+    const by = jy + s.lines.length * H * 0.10 + H * 0.03;
+    ctx.strokeStyle = 'rgba(244,240,230,0.18)';
+    ctx.beginPath(); ctx.moveTo(jx, by - H * 0.03); ctx.lineTo(jx + jw, by - H * 0.03); ctx.stroke();
+    const balanced = dr === cr && dr > 0;
+    ctx.fillStyle = balanced ? 'rgba(130,208,168,0.95)' : 'rgba(244,240,230,0.25)';
+    ctx.font = `${Math.max(9, W * 0.0065)}px monospace`;
+    ctx.fillText(balanced ? '✓ DR 1,284  =  CR 1,284' : 'awaiting extraction…', jx, by);
+
+    /* footer */
+    ctx.fillStyle = 'rgba(244,240,230,0.5)';
+    ctx.font = `${Math.max(10, W * 0.0072)}px monospace`;
+    ctx.fillText('photo → extract → classify → validate → journal → approve → P&L', W * 0.08, H * 0.92);
+  }
+});
+
 
 /* ════════════════════════════════════════════════
    11. CONTACT CANVAS — single radial pulse
